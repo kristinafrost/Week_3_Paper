@@ -11,6 +11,12 @@
 @interface MainViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *newsScrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *newsImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *headlineImageView;
+@property (weak, nonatomic) IBOutlet UIView *swipeView;
+- (IBAction)onTap:(UITapGestureRecognizer *)sender;
+- (IBAction)onSwipeDown:(UISwipeGestureRecognizer *)sender;
+- (IBAction)onSwipeUp:(UISwipeGestureRecognizer *)sender;
+
 
 
 - (void)viewDidLayoutSubviews;
@@ -32,6 +38,22 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+
+
+- (IBAction)onTap:(UITapGestureRecognizer *)sender {
+    NSLog(@"you tapped");
+}
+
+- (IBAction)onSwipeDown:(UISwipeGestureRecognizer *)sender {
+    NSLog(@"you swiped down");
+    self.swipeView.center = CGPointMake(self.swipeView.center.x, self.swipeView.center.y + 20);
+}
+
+- (IBAction)onSwipeUp:(UISwipeGestureRecognizer *)sender {
+    NSLog(@"you swiped up");
+    self.swipeView.center = CGPointMake(self.swipeView.center.x, self.swipeView.center.y - 20);
 }
 
 //Scrolling
