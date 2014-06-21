@@ -48,6 +48,7 @@
                         <outletCollection property="gestureRecognizers" destination="DOl-W8-0eh" appends="YES" id="Ez1-rF-8ha"/>
                         <outletCollection property="gestureRecognizers" destination="oxj-hd-ipC" appends="YES" id="aYh-xY-7gN"/>
                         <outletCollection property="gestureRecognizers" destination="RBc-8h-7LG" appends="YES" id="WB2-Le-l0k"/>
+                        <outletCollection property="gestureRecognizers" destination="QN4-tC-SL9" appends="YES" id="8XO-2t-Mj5"/>
                     </connections>
                 </view>
             </subviews>
@@ -70,6 +71,11 @@
                 <action selector="onSwipeUp:" destination="-1" id="g8W-pI-pIF"/>
             </connections>
         </swipeGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="QN4-tC-SL9">
+            <connections>
+                <action selector="onPan:" destination="-1" id="1z2-5o-K8x"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
     <resources>
         <image name="headline" width="320" height="568"/>
