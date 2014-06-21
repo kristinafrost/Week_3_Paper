@@ -19,6 +19,8 @@
 		44E426CF1955346B00CE1D8F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44E426B71955346B00CE1D8F /* UIKit.framework */; };
 		44E426D71955346B00CE1D8F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44E426D51955346B00CE1D8F /* InfoPlist.strings */; };
 		44E426D91955346B00CE1D8F /* Week_3_PaperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E426D81955346B00CE1D8F /* Week_3_PaperTests.m */; };
+		44E426E51955349400CE1D8F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44E426E31955349400CE1D8F /* MainViewController.m */; };
+		44E426E61955349400CE1D8F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44E426E41955349400CE1D8F /* MainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		44E426D41955346B00CE1D8F /* Week_3_PaperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Week_3_PaperTests-Info.plist"; sourceTree = "<group>"; };
 		44E426D61955346B00CE1D8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		44E426D81955346B00CE1D8F /* Week_3_PaperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Week_3_PaperTests.m; sourceTree = "<group>"; };
+		44E426E21955349400CE1D8F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		44E426E31955349400CE1D8F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		44E426E41955349400CE1D8F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,9 @@
 		44E426A71955346B00CE1D8F = {
 			isa = PBXGroup;
 			children = (
+				44E426E21955349400CE1D8F /* MainViewController.h */,
+				44E426E31955349400CE1D8F /* MainViewController.m */,
+				44E426E41955349400CE1D8F /* MainViewController.xib */,
 				44E426B91955346B00CE1D8F /* Week_3_Paper */,
 				44E426D21955346B00CE1D8F /* Week_3_PaperTests */,
 				44E426B21955346B00CE1D8F /* Frameworks */,
@@ -220,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44E426BE1955346B00CE1D8F /* InfoPlist.strings in Resources */,
+				44E426E61955349400CE1D8F /* MainViewController.xib in Resources */,
 				44E426C61955346B00CE1D8F /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44E426C41955346B00CE1D8F /* AppDelegate.m in Sources */,
+				44E426E51955349400CE1D8F /* MainViewController.m in Sources */,
 				44E426C01955346B00CE1D8F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
