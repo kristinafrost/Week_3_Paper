@@ -72,6 +72,9 @@ float currentSwipeViewYPosition;
     //self.swipeView.center = center;
     CGRect frame = self.swipeView.frame;
     
+    self.newsScrollView.contentSize = self.newsImageView.frame.size;
+    [self.newsScrollView setScrollEnabled:true];
+    
     if (sender.state == UIGestureRecognizerStateBegan) {
          //NSLog(@"began");
         float startingHeight = self.swipeView.frame.origin.y;
@@ -98,8 +101,8 @@ float currentSwipeViewYPosition;
                          }
          ];
         
-        if (self.swipeView.frame.origin.y > 500) {
-            frame.origin.y = 500;
+        if (self.swipeView.frame.origin.y > 520) {
+            frame.origin.y = 520;
             self.swipeView.frame = frame;
                         //NSLog(@"down %@", NSStringFromCGPoint(point));
             
@@ -113,7 +116,6 @@ float currentSwipeViewYPosition;
                                  
                              }
              ];
-
         }
 
     }
@@ -145,12 +147,12 @@ float currentSwipeViewYPosition;
 }
 
 //Scrolling
--(void)viewDidLayoutSubviews {
-    self.newsScrollView.contentSize = self.newsImageView.frame.size;
-    [self.newsScrollView setScrollEnabled:true];
-
-    
-}
+//-(void)viewDidLayoutSubviews {
+//    self.newsScrollView.contentSize = self.newsImageView.frame.size;
+//    [self.newsScrollView setScrollEnabled:true];
+//
+//    
+//}
 
 
 - (void)didReceiveMemoryWarning
