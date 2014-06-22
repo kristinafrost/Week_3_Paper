@@ -14,12 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headlineImageView;
 @property (weak, nonatomic) IBOutlet UIView *swipeView;
 - (IBAction)onTap:(UITapGestureRecognizer *)sender;
-- (IBAction)onSwipeDown:(UISwipeGestureRecognizer *)sender;
-- (IBAction)onSwipeUp:(UISwipeGestureRecognizer *)sender;
 - (IBAction)onPan:(UIPanGestureRecognizer *)sender;
-
-
-- (void)viewDidLayoutSubviews;
 
 @end
 
@@ -52,43 +47,27 @@ float currentSwipeViewYPosition;
 - (IBAction)onTap:(UITapGestureRecognizer *)sender {
     NSLog(@"you tapped");
 }
-//
-//- (IBAction)onSwipeDown:(UISwipeGestureRecognizer *)sender {
-//    NSLog(@"you swiped down");
-//    self.swipeView.center = CGPointMake(self.swipeView.center.x, self.swipeView.center.y + 20);
-//}
-//
-//- (IBAction)onSwipeUp:(UISwipeGestureRecognizer *)sender {
-//    NSLog(@"you swiped up");
-//    self.swipeView.center = CGPointMake(self.swipeView.center.x, self.swipeView.center.y - 20);
-//}
 
 - (IBAction)onPan:(UIPanGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:self.view];
     CGPoint velocity = [sender velocityInView:self.view];
-    //NSLog(@"velocity %@", NSStringFromCGPoint(velocity));
-    //NSLog(@"point %@", NSStringFromCGPoint(point));
-    //CGPoint center = CGPointMake(self.swipeView.center.x, point.y);
-    //self.swipeView.center = center;
+  
     CGRect frame = self.swipeView.frame;
     
+    //news horizontally scrolls!
     self.newsScrollView.contentSize = self.newsImageView.frame.size;
     [self.newsScrollView setScrollEnabled:true];
     
+    //begin panning stuffs
     if (sender.state == UIGestureRecognizerStateBegan) {
-         //NSLog(@"began");
         float startingHeight = self.swipeView.frame.origin.y;
-        //NSLog(@"starting %f", startingHeight);
         startingPanYPosition = point.y;
         currentSwipeViewYPosition = startingHeight;
-        //NSLog(@"starting height %f", startingHeight);
         
     }
     
+    //panning continues stuffs
     else if (sender.state == UIGestureRecognizerStateChanged) {
-         //NSLog(@"changed");
-        //move the view down
-        //no more than 520px
         
         currentPanYPosition = point.y;
         distancePanned = point.y - startingPanYPosition;
@@ -97,62 +76,44 @@ float currentSwipeViewYPosition;
         [UIView animateWithDuration:.2
                          animations:^{
                              self.swipeView.frame = frame;
-                             
                          }
          ];
         
         if (self.swipeView.frame.origin.y > 520) {
             frame.origin.y = 520;
             self.swipeView.frame = frame;
-                        //NSLog(@"down %@", NSStringFromCGPoint(point));
-            
         }
         
         if (self.swipeView.frame.origin.y < 0) {
             frame.origin.y = 0;
-            [UIView animateWithDuration:.2
+            [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:0
                              animations:^{
                                  self.swipeView.frame = frame;
-                                 
-                             }
-             ];
+                             } completion:nil];
         }
 
     }
     
+    //panning ends stuffs
     else if (sender.state == UIGestureRecognizerStateEnded) {
-        //NSLog(@"distance pan %f", distancePanned);
-        
-        
+     
         if (velocity.y >= 0) {
-            NSLog(@"skdfj %@", NSStringFromCGPoint(velocity));
-            frame.origin.y = 500;
+            frame.origin.y = 520;
             self.swipeView.frame = frame;
         }
         
         else if (velocity.y <= 0) {
-            NSLog(@"test %@", NSStringFromCGPoint(velocity));
-            
             frame.origin.y = 0;
-            [UIView animateWithDuration:.3
+            [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:0
                              animations:^{
                                  self.swipeView.frame = frame;
-                                 
-                             }
-             ];
+                             } completion:nil];
+            
         }
         
     }
 
 }
-
-//Scrolling
-//-(void)viewDidLayoutSubviews {
-//    self.newsScrollView.contentSize = self.newsImageView.frame.size;
-//    [self.newsScrollView setScrollEnabled:true];
-//
-//    
-//}
 
 
 - (void)didReceiveMemoryWarning
