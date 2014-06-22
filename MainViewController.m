@@ -68,7 +68,7 @@ float currentSwipeViewYPosition;
     CGPoint velocity = [sender velocityInView:self.view];
     //NSLog(@"velocity %@", NSStringFromCGPoint(velocity));
     //NSLog(@"point %@", NSStringFromCGPoint(point));
-    CGPoint center = CGPointMake(self.swipeView.center.x, point.y);
+    //CGPoint center = CGPointMake(self.swipeView.center.x, point.y);
     //self.swipeView.center = center;
     CGRect frame = self.swipeView.frame;
     
@@ -91,20 +91,29 @@ float currentSwipeViewYPosition;
         distancePanned = point.y - startingPanYPosition;
         
         frame.origin.y = currentSwipeViewYPosition + distancePanned;
-        self.swipeView.frame = frame;
-        
-        
+        [UIView animateWithDuration:.2
+                         animations:^{
+                             self.swipeView.frame = frame;
+                             
+                         }
+         ];
         
         if (self.swipeView.frame.origin.y > 500) {
             frame.origin.y = 500;
             self.swipeView.frame = frame;
-            //NSLog(@"down %@", NSStringFromCGPoint(point));
+                        //NSLog(@"down %@", NSStringFromCGPoint(point));
             
         }
         
         if (self.swipeView.frame.origin.y < 0) {
             frame.origin.y = 0;
-            self.swipeView.frame = frame;
+            [UIView animateWithDuration:.2
+                             animations:^{
+                                 self.swipeView.frame = frame;
+                                 
+                             }
+             ];
+
         }
 
     }
@@ -121,8 +130,14 @@ float currentSwipeViewYPosition;
         
         else if (velocity.y <= 0) {
             NSLog(@"test %@", NSStringFromCGPoint(velocity));
+            
             frame.origin.y = 0;
-            self.swipeView.frame = frame;
+            [UIView animateWithDuration:.3
+                             animations:^{
+                                 self.swipeView.frame = frame;
+                                 
+                             }
+             ];
         }
         
     }
