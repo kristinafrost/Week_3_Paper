@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headlineImageView;
 @property (weak, nonatomic) IBOutlet UIView *swipeView;
 - (IBAction)onTap:(UITapGestureRecognizer *)sender;
-- (IBAction)onPan:(UIPanGestureRecognizer *)sender;
 
 @end
 
@@ -58,6 +57,12 @@ float currentSwipeViewYPosition;
     self.newsScrollView.contentSize = self.newsImageView.frame.size;
     [self.newsScrollView setScrollEnabled:true];
     
+   /* UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:scrollFrame];
+	self.newsScrollView.minimumZoomScale = 0.5;
+	self.newsScrollView.maximumZoomScale = 2.0;
+	self.newsScrollView.delegate = self; */
+    
+    
     //begin panning stuffs
     if (sender.state == UIGestureRecognizerStateBegan) {
         float startingHeight = self.swipeView.frame.origin.y;
@@ -73,11 +78,10 @@ float currentSwipeViewYPosition;
         distancePanned = point.y - startingPanYPosition;
         
         frame.origin.y = currentSwipeViewYPosition + distancePanned;
-        [UIView animateWithDuration:.2
+        [UIView animateWithDuration:.7 delay:0 usingSpringWithDamping:.9 initialSpringVelocity:0 options:0
                          animations:^{
                              self.swipeView.frame = frame;
-                         }
-         ];
+                         } completion:nil];
         
         if (self.swipeView.frame.origin.y > 520) {
             frame.origin.y = 520;
@@ -86,10 +90,8 @@ float currentSwipeViewYPosition;
         
         if (self.swipeView.frame.origin.y < 0) {
             frame.origin.y = 0;
-            [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:0
-                             animations:^{
-                                 self.swipeView.frame = frame;
-                             } completion:nil];
+            self.swipeView.frame = frame;
+            
         }
 
     }
@@ -104,7 +106,7 @@ float currentSwipeViewYPosition;
         
         else if (velocity.y <= 0) {
             frame.origin.y = 0;
-            [UIView animateWithDuration:.6 delay:0 usingSpringWithDamping:100 initialSpringVelocity:0 options:0
+            [UIView animateWithDuration:.7 delay:0 usingSpringWithDamping:.9 initialSpringVelocity:0 options:0
                              animations:^{
                                  self.swipeView.frame = frame;
                              } completion:nil];
