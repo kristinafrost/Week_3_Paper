@@ -15,7 +15,7 @@ Homework 3
       * :white_large_square: Optional: Dragging on the scrollable feed of headlines should change the scale of the feed
 * **GIF walkthrough of all required and optional stories (using LICEcap)**
 
-<img width="320" src=""/>
+![screenshot] (/Week2hw-3.gif?raw=true "GIF")
 
 ---
 
