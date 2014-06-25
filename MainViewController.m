@@ -19,7 +19,6 @@
 
 @implementation MainViewController
 
-float currentPanYPosition;
 float startingPanYPosition;
 float distancePanned;
 float currentSwipeViewYPosition;
@@ -39,9 +38,32 @@ float currentSwipeViewYPosition;
     // Do any additional setup after loading the view from its nib.
     
     currentSwipeViewYPosition = 0;
+    
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)])
+    {
+        [self prefersStatusBarHidden];
+        [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    }
+    else
+    {
+        // iOS 6
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    }
+    
+    
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if (otherGestureRecognizer == self.newsScrollView.panGestureRecognizer) {
+        return YES;
+    }
+    return NO;
+    
+}
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 - (IBAction)onTap:(UITapGestureRecognizer *)sender {
     NSLog(@"you tapped");
@@ -56,12 +78,7 @@ float currentSwipeViewYPosition;
     //news horizontally scrolls!
     self.newsScrollView.contentSize = self.newsImageView.frame.size;
     [self.newsScrollView setScrollEnabled:true];
-    
-   /* UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:scrollFrame];
-	self.newsScrollView.minimumZoomScale = 0.5;
-	self.newsScrollView.maximumZoomScale = 2.0;
-	self.newsScrollView.delegate = self; */
-    
+
     
     //begin panning stuffs
     if (sender.state == UIGestureRecognizerStateBegan) {
@@ -74,26 +91,19 @@ float currentSwipeViewYPosition;
     //panning continues stuffs
     else if (sender.state == UIGestureRecognizerStateChanged) {
         
-        currentPanYPosition = point.y;
         distancePanned = point.y - startingPanYPosition;
-        
         frame.origin.y = currentSwipeViewYPosition + distancePanned;
-        [UIView animateWithDuration:.7 delay:0 usingSpringWithDamping:.9 initialSpringVelocity:0 options:0
-                         animations:^{
-                             self.swipeView.frame = frame;
-                         } completion:nil];
         
-        if (self.swipeView.frame.origin.y > 520) {
+        if (frame.origin.y > 520) {
             frame.origin.y = 520;
-            self.swipeView.frame = frame;
         }
         
-        if (self.swipeView.frame.origin.y < 0) {
-            frame.origin.y = 0;
-            self.swipeView.frame = frame;
-            
+        if (frame.origin.y < 0) {
+            frame.origin.y = frame.origin.y/5;
         }
 
+        self.swipeView.frame = frame;
+        
     }
     
     //panning ends stuffs
@@ -101,7 +111,10 @@ float currentSwipeViewYPosition;
      
         if (velocity.y >= 0) {
             frame.origin.y = 520;
-            self.swipeView.frame = frame;
+            [UIView animateWithDuration:.7 delay:0 usingSpringWithDamping:.9 initialSpringVelocity:0 options:0
+                             animations:^{
+                                 self.swipeView.frame = frame;
+                             } completion:nil];
         }
         
         else if (velocity.y <= 0) {
